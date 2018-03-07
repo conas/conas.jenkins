@@ -1,0 +1,16 @@
+version: '3'
+services:
+  jenkins:
+    build: ./jenkins
+    ports:
+     - "8080:8080"
+     - "50000:50000"
+    volumes: 
+     - jenkins:/var/jenkins_home
+  nginx:
+    build: ./nginx
+    ports:
+     - "80:80"
+volumes: 
+  jenkins:
+    name: jenkins
