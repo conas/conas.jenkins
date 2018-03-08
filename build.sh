@@ -26,8 +26,8 @@ function certificate() {
     openssl x509 -req -days $CERTIFICATE_VALIDITY -in server.csr -signkey server.key -out server.crt
 
     mkdir -p nginx/cert
-    mv server.crt nginx/cert/cert.crt
-    mv server.key nginx/cert/cert.key
+    mv server.crt nginx/cert/ssl.crt
+    mv server.key nginx/cert/ssl.key
 
     rm passphrase.txt server.csr server.key.org
 }
@@ -35,7 +35,7 @@ function certificate() {
 certificate $SUBJECT
 
 if hash docker-compose 2>/dev/null; then    
-    docker-compose build .
+    docker-compose build
     else
         echo "docker-compose not installed"
         exit 1
