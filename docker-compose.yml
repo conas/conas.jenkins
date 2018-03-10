@@ -10,7 +10,10 @@ services:
     build: ./jenkins/docker-slave
     depends_on:
       - "jenkins"
-    command: ["./wait-for-it.sh", "jenkins:8080", "--", java", "-jar", "/usr/share/jenkins/slave.jar"]
+    command: ["./wait-for-it.sh", "jenkins:8080", "--", "jenkins-slave"]
+    environment:
+     - JENKINS_URL=jenkins:8080
+     - JENKINS_AGENT_NAME=jenkins-docker
   nginx:
     container_name: nginx    
     build: ./nginx

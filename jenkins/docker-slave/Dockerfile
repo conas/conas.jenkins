@@ -1,3 +1,4 @@
-FROM jenkinsci/slave:3.7-1
-COPY wait-for-it.sh /opt
-WORKDIR /opt
+FROM jenkins/jnlp-slave
+COPY wait-for-it.sh .
+USER root
+RUN chmod +x wait-for-it.sh
