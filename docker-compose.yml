@@ -2,10 +2,7 @@ version: '3'
 services:
   jenkins:
     container_name: jenkins
-    build: ./jenkins
-    ports:
-     - "8080:8080"
-     - "50000:50000"
+    build: ./jenkins    
     volumes: 
      - jenkins:/var/jenkins_home
      - /var/run/docker.sock:/var/run/docker.sock
@@ -13,6 +10,7 @@ services:
     build: ./jenkins/docker-slave
     depends_on:
       - "jenkins"
+    command: ["./wait-for-it.sh", "jenkins:8080", "--", java", "-jar", "/usr/share/jenkins/slave.jar"]
   nginx:
     container_name: nginx    
     build: ./nginx
