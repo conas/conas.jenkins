@@ -36,8 +36,7 @@ certificate $SUBJECT
 
 if hash docker-compose 2>/dev/null; then    
     docker-compose build
-    else
-        echo "docker-compose not installed"
-        exit 1
-    fi
-}
+else
+    echo "docker-compose not installed"
+    exit 1
+fi
