@@ -9,10 +9,15 @@ services:
     volumes: 
      - jenkins:/var/jenkins_home
      - /var/run/docker.sock:/var/run/docker.sock
+  jenkins-docker:
+    build: ./jenkins/docker-slave
+    depends_on:
+      - "jenkins"
   nginx:
     container_name: nginx    
     build: ./nginx
     ports:
      - "80:80"
+     - "443:443"
 volumes: 
   jenkins:
